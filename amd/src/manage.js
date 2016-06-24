@@ -1,4 +1,3 @@
-<?php
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -16,16 +15,24 @@
 
 /**
  * @package    enrol_apply
- * @copyright  emeneo.com (http://emeneo.com/)
+ * @copyright  2016 sudile GbR (http://www.sudile.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
- * @author     Flotter Totte <flottertotte@emeneo.com>
  * @author     Johannes Burk <johannes.burk@sudile.com>
  */
 
-defined('MOODLE_INTERNAL') || die();
+/**
+ * @module enrol_apply/manage
+ */
+define(['jquery'], function($) {
+    return {
+        init: function() {
+            $('#toggleall').on('change', function() {
+                $('input[name="userenrolments[]"]').prop('checked', $('#toggleall').prop('checked'));
+            });
 
-$plugin->version  = 2016060800;
-$plugin->requires = 2011080100;
-$plugin->maturity = MATURITY_STABLE;
-$plugin->release = 'Enrolment upon approval plugin Version 3.1-a';
-$plugin->component = 'enrol_apply';
+            $('#formaction').on('change', function() {
+                $('#enrol_apply_manage_form').submit();
+            });
+        }
+    };
+});
